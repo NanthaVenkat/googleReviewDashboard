@@ -1,0 +1,202 @@
+/* review card */
+
+.dashboard-card {
+  border-radius: 15px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* width: calc(100% - 15px); */
+  width: 100%;
+}
+
+.revie-image {
+  padding: 10px;
+  background-color: #775da6;
+  border: 5px solid #e9d5ff;
+  border-radius: 50%;
+}
+
+.card-name p {
+  font-weight: 600;
+  color: #000;
+  line-height: 1.2;
+}
+
+#review-count {
+  font-family: "poppins", sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  color: #542a81;
+}
+
+.rev-name-name {
+  font-weight: 400;
+  color: #000;
+}
+
+.rev-date {
+  font-weight: 400;
+  color: #a9a9a9;
+}
+
+.pie-chart-wr {
+  width: 320px;
+  height: 320px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 13px;
+}
+
+.legend-image {
+  margin-right: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: max-content;
+}
+
+.link-arr {
+  color: #7c50c5;
+  font-weight: 600;
+}
+
+@media (min-width: 1660px) {
+  .rev-date {
+    font-size: 12px;
+  }
+
+  .rev-name-name {
+    font-size: 18px;
+  }
+
+  .review-star-count img {
+    height: 20px;
+  }
+
+  .revie-image img {
+    width: 27px;
+    height: 27px;
+  }
+
+  #review-count {
+    font-size: 40px;
+  }
+
+  .card-name p {
+    font-size: 22px;
+  }
+
+}
+
+@media (max-width: 1660px) {
+  .rev-date {
+    font-size: 10px;
+  }
+
+  .rev-name-name {
+    font-size: 15px;
+  }
+
+  .review-star-count img {
+    height: 16px;
+  }
+
+  .revie-image img {
+    width: 27px;
+    height: 27px;
+  }
+
+  #review-count {
+    font-size: 35px;
+  }
+
+  .card-name p {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .dashboard-card.nb .border-bottom {
+    border: none !important;
+  }
+
+  .dashboard-card.nm {
+    margin-top: -70px !important;
+    box-shadow: 0 4px 20px 0 #0000000d;
+  }
+}
+
+@media (max-width: 992px) {
+  .dashboard-card.tr {
+    background-color: transparent !important;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .dashboard-card.nm {
+    margin-top: -50px !important;
+  }
+
+  .card-name p {
+    font-size: 16px !important;
+  }
+
+  #review-count {
+    font-size: 28px !important;
+  }
+
+  .legend-item {
+    font-size: 12px;
+  }
+
+  .legend-image {
+    margin-right: 5px;
+    width: 12px;
+  }
+
+  .legend-color {
+    margin-right: 5px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .rev-profile-cover img {
+    width: 45px;
+  }
+
+  #page-name {
+    font-size: 19px;
+  }
+
+  .revie-image img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .pie-chart-wr {
+    width: 280px;
+    height: 280px;
+    padding: 15px;
+  }
+}
+
+.view-all-btn {
+  border-radius: 10px;
+  background-color: #775da6;
+  width: 100%;
+  max-width: 540px;
+}

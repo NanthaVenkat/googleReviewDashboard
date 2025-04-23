@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <!-- google fonts Nunito Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet"/>
+    <!-- google fonts Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+      * {
+        font-family: "Nunito Sans", sans-serif;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f3f4f9;
+      }
+
+      a,
+      a:hover,
+      a:active,
+      a:focus {
+        text-decoration: none;
+      }
+
+      .profile-pic {
+        min-width: 65px;
+        height: 65px;
+        background-color: #f2f2f2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid;
+      }
+
+      .profile-pic img {
+        width: 45px;
+      }
+
+      .profile-user h2 {
+        font-size: 24px;
+        font-weight: 600;
+        color: #121212;
+      }
+
+      .profile-user p {
+        font-size: 22px;
+        font-weight: 400;
+        color: #454545;
+      }
+
+      .toggle-nav {
+        min-width: 330px;
+        height: 100vh;
+        transition: 0.5s;
+      }
+
+      .nav-wrapper {
+        box-shadow: 0px 4px 40px 0px #00000026;
+        z-index: 3;
+      }
+
+      .do-list {
+        list-style: none;
+      }
+
+      .d-options.active a {
+        background-color: #e1e1e1;
+      }
+
+      .d-options.active a {
+        color: #68499f;
+        font-weight: 600;
+      }
+
+      .d-options a {
+        color: #121212;
+        font-weight: 400;
+        font-size: 22px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        /* justify-content: space-between; */
+        width: 100%;
+      }
+
+      .d-options img {
+        width: 30px;
+      }
+
+      .d-options .nav-collapse {
+        margin-left: 20px;
+      }
+
+      /* dashboard- body */
+      .dashboard-body {
+        width: 100%;
+      }
+
+      .dashboard-body {
+        background-image: linear-gradient(to right, #775da6, #9747ff);
+      }
+
+      #page-name {
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 1;
+      }
+
+      #dsearch {
+        border: none;
+        box-shadow: none;
+        padding: 10px 20px;
+        font-size: 20px;
+        border-radius: 30px;
+        background-color: transparent;
+        outline: none;
+        color: #ffffff;
+        font-weight: 400;
+      }
+
+      #dsearch::placeholder {
+        color: #b280f9;
+        font-weight: 400;
+        font-size: 20px;
+      }
+
+      .nav-search-bar {
+        display: flex;
+        align-items: center;
+        border: 1px solid #b280f9;
+        border-radius: 30px;
+        padding: 0 20px;
+      }
+
+      /* nav hide */
+      .nav-collapse,
+      .nav-collapse h2,
+      .nav-collapse p {
+        transition: 0.3s;
+      }
+
+      .hide-nav .nav-collapse,
+      .hide-nav .nav-collapse h2,
+      .hide-nav .nav-collapse p {
+        font-size: 0;
+        display: none;
+      }
+
+      .toggle-nav.hide-nav {
+        min-width: 130px;
+      }
+
+      /* inner body */
+      .inner-dash-body {
+        background-color: #f6f6f6;
+        border-radius: 50px 50px 0 0;
+      }
+
+      /* day filter */
+      .filter-filter a {
+        border-radius: 50px;
+        background-color: #e1e1e1;
+        color: #9d9d9d;
+        text-transform: capitalize;
+        padding: 5px 40px;
+        display: inline-block;
+        font-size: 18px;
+        font-weight: 400;
+        transition: 0.3s;
+      }
+
+      .filter-filter a:hover {
+        opacity: 0.6;
+      }
+
+      .filter-filter a.active {
+        background-color: #775da6;
+        color: #fff;
+      }
+
+      #day-filter {
+        list-style: none;
+      }
+
+      /* review card */
+
+      .dashboard-card {
+        border-radius: 15px;
+      }
+
+      .revie-image img {
+        width: 27px;
+        height: 27px;
+      }
+
+      .revie-image {
+        padding: 10px;
+        background-color: #775DA6;
+        border: 5px solid #E9D5FF;
+        border-radius: 50%;
+      }
+
+      .card-name p {
+        font-size: 22px;
+        font-weight: 400;
+        color: #000;
+        line-height: 1.2;
+      }
+
+      #review-count {
+        font-family: "poppins", sans-serif;
+        font-weight: 600;
+        font-size: 40px;
+        line-height: 1;
+        color: #542A81;
+      }
+
+      .h3_h h3 {
+
+        font-size: 25px;
+        font-weight: 600;
+
+      }
+
+      .Bad_Reviews {
+        margin: 2%;
+        background: #fff;
+      }
+
+      .checked {
+  color: orange;
+}
+
+.mta {
+  display: -webkit-box;
+  margin-bottom: 20px;
+}
+
+.meta p {
+  margin-bottom: 0rem;
+}
+
+.meta {
+  margin-left: 5%;
+}
+
+.post-entry h3 {
+
+  font-size: 15px;
+    background: #F5F5F5;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+
+textarea {
+  overflow: auto;
+    resize: vertical;
+    background: #f5f5f5;
+    border: 0px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.post-entry .align-items-center {
+
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.status button {
+  background: #785CAA;
+    border: 2px;
+    color: #fff;
+    padding: 8px;
+    border-radius: 20px;
+    font-size: 14px;
+    width: 150px;
+}
+
+
+.status button:hover {
+  background: #785CAA;
+    border: 2px;
+    color: #fff;
+    padding: 8px;
+    border-radius: 20px;
+    font-size: 14px;
+    width: 150px;
+}
+
+.date h6 {
+  font-size: 13px;
+  color: #ccc;
+}
+
+
+.mor-2 {
+  position: relative; 
+}
+
+.mor {
+  position: absolute;
+  top: 0;     
+  right: 0;    
+  color: red;  
+  padding: 5px; 
+}
+
+.post-content {
+  padding-bottom: 30px;
+}
+
+.overflow-auto {
+    overflow: hidden !important;
+}
+
+.st_2 button {
+  background: #FFDADA;
+  color: #000;
+}
+
+.st_3 button {
+background: #CEF8DA;
+color: #000;
+}
+
+.st_4 button {
+  background: #FFEBC3;
+  color: #000;
+}
+
+.st_2 button:hover {
+  background: #FFDADA;
+  color: #000;
+}
+
+.st_3 button:hover {
+background: #CEF8DA;
+color: #000;
+}
+
+.st_4 button:hover {
+  background: #FFEBC3;
+  color: #000;
+}
+
+.post-entry {
+    padding: 20px;
+}
+
+.border {
+    border: 0.4px solid #dee2e6 !important;
+}
+
+.Bad_Reviews .container {
+  max-width: 100%;
+}
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-wr d-flex positio-fixed w-100">
+      <!-- nav bar -->
+      <div class="positio-fixed nav-wrapper">
+        <div id="toggle-nav" class="toggle-nav d-flex flex-column p-4">
+          <div class="login-profile d-flex align-flex-start py-3 border-bottom">
+            <div class="profile-pic position-relative rounded-circle">
+              <img class="" src="https://staging.sriramakrishnahospital.com/wp-content/uploads/2024/09/srh-logo-mini-colored.svg" alt="profile-picture"/>
+            </div>
+
+            <!-- profile -->
+            <div class="profile-user nav-collapse ml-4">
+              <h2 id="login-user" class="log-user-name mb-2">Mr. Lorem Ipsum</h2>
+              <p id="user-authority" class="user-value">Admin</p>
+            </div>
+          </div>
+
+          <!-- dashboard menus -->
+          <div class="dashboard-options py-5">
+            <ul class="do-list position-relative p-0">
+              <li class="d-options mb-3">
+                <a class="p-3 rounded" href="#"><img src="./img/dashboard-icon.svg" alt="" /><span class="nav-collapse">Dashboard</span></a>
+              </li>
+              <li class="d-options mb-3 active">
+                <a class="p-3 rounded" href="#"><img src="./img/bad-review.svg" alt="" /><span class="nav-collapse">Bad Reviews</span></a>
+              </li>
+              <li class="d-options mb-3">
+                <a class="p-3 rounded" href="#"><img src="./img/log-out.svg" alt="" /><span class="nav-collapse">Log Out</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- dashboard body -->
+      <div class="dashboard-body overflow-auto">
+        <nav class="nabar d-flex justify-content-between py-4 px-5">
+          <div class="nav-btn-wr d-flex align-items-center">
+            <button id="navbtn" class="btn mr-3">
+              <img src="./img/Vectornavbtn.svg" alt=""/>
+            </button>
+            <div id="page-name" class="text-white">Dashboard</div>
+          </div>
+          <div class="nav-search-bar">
+            <img src="./img/Vectorsearch.svg" alt="search" />
+            <input
+              type="search"
+              id="dsearch"
+              name="dsearch"
+              placeholder="Search"
+            />
+          </div>
+        </nav>
+
+        <!-- inner body -->
+        <div class="inner-dash-body h-100 p-4">
+          <!-- day filters -->
+          <ul id="day-filter" class="p-3 mb-0 d-flex w-100">
+            <li class="p-2 filter-filter">
+              <a id="all-df" class="active" href="javascript:void(0)">All</a>
+            </li>
+            <li class="p-2 filter-filter">
+              <a id="today-df" class="" href="javascript:void(0)">Today</a>
+            </li>
+            <li class="p-2 filter-filter">
+              <a id="yesterday-df" class="" href="javascript:void(0)">Yesterday</a>
+            </li>
+            <li class="p-2 filter-filter">
+              <a id="lastsdays-df" class="" href="javascript:void(0)">Last 7 Days</a>
+            </li>
+            <li class="p-2 filter-filter">
+              <a id="custom-df" class="" href="javascript:void(0)">Custom</a>
+            </li>
+          </ul>
+
+          <div class="dash-body-inner-inner d-flex row">
+            <div class="col-12 col-md-4 h3_h">
+             
+              <h3>35 Reviews</h3>
+            </div>
+
+            <div class="col-12 col-md-7">
+            </div>
+          </div>
+
+
+          <section id="Bad_Reviews" class="Bad_Reviews section">
+               
+            <div class="container">
+              
+              <div class="row gy-4">
+                <div class="col-md-6 col-lg-4 border">
+                  <div class="post-entry">
+      
+                    <div class="post-content">
+
+                      <div class="mta">
+
+                        <img src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+
+                        <div class="meta">
+                          <p href="#" class="cat">Steve</p>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                        </div>
+
+                        
+
+                        
+
+                      </div>
+
+                     
+
+
+
+                      <h3>+91 9876543210</h3>
+                      <textarea id="review" name="review" rows="4" cols="31" readonly>I have been a patient at SRH for years and am disappointed with what they have turned into . . .</textarea>
+
+
+      
+                      <div class="d-flex author align-items-center">
+                        <div class="date">
+                          <h6>September 18, 2024</h6>
+                        </div>
+                        <div class="status">
+                          <button>Update Status</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="col-md-6 col-lg-4 border">
+                  <div class="post-entry">
+      
+                    <div class="post-content">
+
+                      <div class="mta">
+
+                        <img src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+
+                        <div class="meta">
+                          <p href="#" class="cat">Ahamed</p>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                        </div>
+
+                        
+
+                      </div>
+
+                     
+
+
+
+                      <h3>+91 9876543210</h3>
+                      <textarea id="review" name="review" rows="4" cols="31" readonly>Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate  . . .</textarea>
+
+
+      
+                      <div class="d-flex author align-items-center">
+                        <div class="date">
+                          <h6>September 18, 2024</h6>
+                        </div>
+                        <div class="status st_2">
+                          <button>Not Converted</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="col-md-6 col-lg-4 border">
+                  <div class="post-entry">
+      
+                    <div class="post-content">
+
+                      <div class="mta">
+
+                        <img src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+
+                        <div class="meta">
+                          <p href="#" class="cat">Priya</p>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star "></span>
+                          <span class="fa fa-star "></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                        </div>
+
+                        
+                      </div>
+
+                     
+
+
+
+                      <h3>+91 9876543210</h3>
+                      <textarea id="review" name="review" rows="4" cols="31" readonly>Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate  . . .</textarea>
+
+
+      
+                      <div class="d-flex author align-items-center">
+                        <div class="date">
+                          <h6>September 18, 2024</h6>
+                        </div>
+                        <div class="status st_3">
+                          <button>Converted</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="col-md-6 col-lg-4 border">
+                  <div class="post-entry">
+      
+                    <div class="post-content">
+
+                      <div class="mta">
+
+                        <img src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+
+                        <div class="meta">
+                          <p href="#" class="cat">Jayashree</p>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                        </div>
+
+                        <span class="mor">
+                          +3 More
+                        </span>
+                      </div>
+
+                     
+
+
+
+                      <h3>+91 9876543210</h3>
+                      <textarea id="review" name="review" rows="4" cols="31" readonly>Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate  . . .</textarea>
+
+
+      
+                      <div class="d-flex author align-items-center">
+                        <div class="date">
+                          <h6>September 18, 2024</h6>
+                        </div>
+                        <div class="status st_4">
+                          <button>Not Responded</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="col-md-6 col-lg-4 border">
+                  <div class="post-entry">
+      
+                    <div class="post-content">
+
+                      <div class="mta">
+
+                        <img src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+
+                        <div class="meta">
+                          <p href="#" class="cat">Lalitha</p>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star "></span>
+                          <span class="fa fa-star "></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                        </div>
+
+                        
+                      </div>
+
+                     
+
+
+
+                      <h3>+91 9876543210</h3>
+                      <textarea id="review" name="review" rows="4" cols="31" readonly>Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate  . . .</textarea>
+
+
+      
+                      <div class="d-flex author align-items-center">
+                        <div class="date">
+                          <h6>September 18, 2024</h6>
+                        </div>
+                        <div class="status st_3">
+                          <button>Converted</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+                <div class="col-md-6 col-lg-4 border">
+                  <div class="post-entry">
+      
+                    <div class="post-content">
+
+                      <div class="mta">
+
+                        <img src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+
+                        <div class="meta">
+                          <p href="#" class="cat">Harish</p>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                        </div>
+
+                       
+                      </div>
+
+                     
+
+
+
+                      <h3>+91 9876543210</h3>
+                      <textarea id="review" name="review" rows="4" cols="31" readonly>Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate  . . .</textarea>
+
+
+      
+                      <div class="d-flex author align-items-center">
+                        <div class="date">
+                          <h6>September 18, 2024</h6>
+                        </div>
+                        <div class="status st_3">
+                          <button>Converted</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+                <div class="col-md-6 col-lg-4 border">
+                  <div class="post-entry">
+      
+                    <div class="post-content">
+
+                      <div class="mta">
+
+                        <img src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+
+                        <div class="meta">
+                          <p href="#" class="cat">Kaviya </p>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                        </div>
+
+                       
+                      </div>
+
+                     
+
+
+
+                      <h3>+91 9876543210</h3>
+                      <textarea id="review" name="review" rows="4" cols="31" readonly>Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate  . . .</textarea>
+
+
+      
+                      <div class="d-flex author align-items-center">
+                        <div class="date">
+                          <h6>September 18, 2024</h6>
+                        </div>
+                        <div class="status st_2">
+                          <button>Not Converted</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+                <div class="col-md-6 col-lg-4 border">
+                  <div class="post-entry">
+      
+                    <div class="post-content">
+
+                      <div class="mta">
+
+                        <img src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+
+                        <div class="meta">
+                          <p href="#" class="cat">Karthick</p>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                        </div>
+
+                       
+                      </div>
+
+                     
+
+
+
+                      <h3>+91 9876543210</h3>
+                      <textarea id="review" name="review" rows="4" cols="31" readonly>Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate  . . .</textarea>
+
+
+      
+                      <div class="d-flex author align-items-center">
+                        <div class="date">
+                          <h6>September 18, 2024</h6>
+                        </div>
+                        <div class="status st_2">
+                          <button>Not Converted</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+                <div class="col-md-6 col-lg-4 border">
+                  <div class="post-entry">
+      
+                    <div class="post-content">
+
+                      <div class="mta">
+
+                        <img src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+
+                        <div class="meta">
+                          <p href="#" class="cat">Nithya Shri</p>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                        </div>
+
+                       
+                      </div>
+
+                     
+
+
+
+                      <h3>+91 9876543210</h3>
+                      <textarea id="review" name="review" rows="4" cols="31" readonly>Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate  . . .</textarea>
+
+
+      
+                      <div class="d-flex author align-items-center">
+                        <div class="date">
+                          <h6>September 18, 2024</h6>
+                        </div>
+                        <div class="status st_2">
+                          <button>Not Converted</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- custom scripts -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get the button and the navigation sidebar
+        const navButton = document.getElementById("navbtn");
+        const toggleNav = document.getElementById("toggle-nav");
+        const dashboardBody = document.querySelector(".dashboard-body");
+
+        // Add click event listener
+        navButton.addEventListener("click", function () {
+          // Toggle the class to hide or show the sidebar
+          toggleNav.classList.toggle("hide-nav");
+          dashboardBody.classList.toggle("expand-body");
+        });
+      });
+    </script>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

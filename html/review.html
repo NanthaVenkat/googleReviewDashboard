@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bad Reviews Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Basic styles for body and layout */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+        }
+
+        /* Floating menu icon (Hamburger) */
+        .menu-btn {
+            font-size: 30px;
+            cursor: pointer;
+            padding: 10px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1050;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            transition: 0.3s;
+            z-index: 2000;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar h4 {
+            padding-left: 10px;
+            font-weight: bold;
+        }
+
+        .sidebar ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            cursor: pointer;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #ddd;
+        }
+
+        /* Main content area */
+        .content {
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Filter buttons for All, Today, Yesterday, Last 7 Days */
+        .filter-btns {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: #6200ee;
+            color: white;
+        }
+
+        /* Review card styles */
+        .review-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-card h5 {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .review-card p {
+            margin: 10px 0;
+        }
+
+        .review-card button {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <h4>Mr. Lorem Ipsum</h4>
+        <ul>
+            <li onclick="showDashboard()">Dashboard</li>
+            <li onclick="showBadReviews()">Bad Reviews</li>
+            <li onclick="logOut()">Log Out</li>
+        </ul>
+    </div>
+
+    <!-- Menu Button (Hamburger Icon) -->
+    <div class="menu-btn" onclick="toggleSidebar()">&#9776;</div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Filter Buttons (All, Today, Yesterday, Last 7 Days) -->
+        <div class="filter-btns">
+            <div class="filter-btn active" onclick="filterReviews('all')">All</div>
+            <div class="filter-btn" onclick="filterReviews('today')">Today</div>
+            <div class="filter-btn" onclick="filterReviews('yesterday')">Yesterday</div>
+            <div class="filter-btn" onclick="filterReviews('last7days')">Last 7 Days</div>
+        </div>
+
+        <!-- Bad Reviews Section -->
+        <div class="reviews">
+            <div class="review-card">
+                <h5>Steve</h5>
+                <p>I have been a patient at SRH for years and am disappointed with what they have turned into. Outside, the doctor's room is unhygienic and crowded.</p>
+                <button class="btn btn-outline-primary">Update Status</button>
+            </div>
+            <div class="review-card">
+                <h5>Steve</h5>
+                <p>I have been a patient at SRH for years and am disappointed with what they have turned into. Outside, the doctor's room is unhygienic and crowded.</p>
+                <button class="btn btn-outline-danger">Not Converted</button>
+            </div>
+            <div class="review-card">
+                <h5>Ahamed</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button class="btn btn-outline-success">Converted</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Toggle Sidebar
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // Functions to show different content (you can customize)
+        function showDashboard() {
+            alert('Dashboard clicked');
+        }
+
+        function showBadReviews() {
+            alert('Bad Reviews clicked');
+        }
+
+        function logOut() {
+            alert('Logging out...');
+        }
+
+        // Filter Reviews Functionality
+        function filterReviews(filter) {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+
+            switch (filter) {
+                case 'all':
+                    document.querySelector('.filter-btns .filter-btn:nth-child(1)').classList.add('active');
+                    break;
+                case 'today':
+                    document.querySelector('.filter-btns .filter-btn:nth-child(2)').classList.add('active');
+                    break;
+                case 'yesterday':
+                    document.querySelector('.filter-btns .filter-btn:nth-child(3)').classList.add('active');
+                    break;
+                case 'last7days':
+                    document.querySelector('.filter-btns .filter-btn:nth-child(4)').classList.add('active');
+                    break;
+            }
+
+            // Implement actual filtering functionality as per requirement
+        }
+    </script>
+
+</body>
+</html>

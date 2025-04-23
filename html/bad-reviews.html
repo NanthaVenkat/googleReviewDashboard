@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- google fonts Nunito Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+    rel="stylesheet" />
+  <!-- google fonts Poppins -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  <!-- chart Js CDn -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- chart lable -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <!-- <link rel="stylesheet" href="./css/adminNew.css"> -->
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    .checked {
+      color: orange;
+    }
+
+    .post-entry h3 {
+      font-size: 15px;
+      background: #F5F5F5;
+      font-weight: 400;
+    }
+
+    .bg-gray {
+      background-color: #F5F5F5;
+    }
+
+    .riview-textarea {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+      font-size: 15px;
+      font-weight: 400;
+    }
+
+    .status button {
+      background: #785CAA;
+      border: 2px;
+      color: #fff;
+      padding: 8px;
+      border-radius: 20px;
+      font-size: 14px;
+      width: 150px;
+    }
+
+
+    .status button:hover {
+      background: #785CAA;
+      border: 2px;
+      color: #fff;
+      padding: 8px;
+      border-radius: 20px;
+      font-size: 14px;
+      width: 150px;
+    }
+
+    .date h6 {
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .more-msg {
+      top: 1.5rem;
+      right: 2rem;
+      color: red;
+    }
+
+    .st_2 button {
+      background: #FFDADA;
+      color: #000;
+    }
+
+    .st_3 button {
+      background: #CEF8DA;
+      color: #000;
+    }
+
+    .st_4 button {
+      background: #FFEBC3;
+      color: #000;
+    }
+
+    .st_2 button:hover {
+      background: #FFDADA;
+      color: #000;
+    }
+
+    .st_3 button:hover {
+      background: #CEF8DA;
+      color: #000;
+    }
+
+    .st_4 button:hover {
+      background: #FFEBC3;
+      color: #000;
+    }
+
+    .border {
+      border: 0.4px solid #dee2e6 !important;
+    }
+
+    /* -- */
+    #page-title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .cat {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    /* filter button */
+    .filter-button button,
+    .filter-button button:hover {
+      font-size: 24px;
+      font-weight: 600;
+      color: #7C50C5;
+    }
+
+    .filter-button img {
+      width: 20px;
+    }
+
+    .filter-options p {
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    .filter-options input {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* common bootstrap style */
+    .modal-content {
+      border-radius: 21px;
+    }
+
+    .modal-header .close {
+      font-size: 30px;
+    }
+
+    .modal-footer button {
+      border: 2px solid #785CAA;
+      flex-grow: 1;
+    }
+
+    .modal-title {
+      font-weight: 600;
+    }
+
+    .apply-btn,
+    .apply-btn:hover {
+      background-color: #785CAA;
+      color: #fff;
+    }
+
+    /* ---- */
+    @media (max-width: 1200px) {
+      #Bad_Reviews {
+        background-color: #F6F6F6;
+        border-radius: 50px 50px 0 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .border.nb-md {
+        border: none !important;
+      }
+
+      .bg-lg {
+        background-color: transparent !important;
+      }
+
+      .post-entry {
+        background-color: #fff;
+      }
+    }
+
+    /* Base styling for the progress bar */
+    progress {
+      appearance: none;
+      height: 5px;
+      border-radius: 10px;
+      background-color: #e0e0e0;
+      border: none;
+      overflow: hidden;
+    }
+
+    /* Webkit browsers (Chrome, Safari) */
+    progress::-webkit-progress-bar {
+      background-color: #e0e0e0;
+      border-radius: 10px;
+    }
+
+    progress::-webkit-progress-value {
+      background-color: #4caf50;
+      border-radius: 10px 0 0 10px;
+      transition: width 0.4s ease;
+    }
+
+    /* Mozilla Firefox */
+    progress::-moz-progress-bar {
+      background-color: #4caf50;
+      border-radius: 10px 0 0 10px;
+      transition: width 0.4s ease;
+    }
+
+    /* Styling for Internet Explorer/Edge */
+    progress::-ms-fill {
+      background-color: #4caf50;
+      border-radius: 10px 0 0 10px;
+    }
+
+    .progress-bar-wr span {
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .avarage-rev span {
+      font-size: 15px;
+      font-weight: 400;
+      color: #A2A2A2;
+      width: max-content;
+    }
+
+    .avarage-rev h2 {
+      font-weight: 600;
+      font-size: 35px;
+    }
+
+    .status-option input,
+    .status-option textarea,
+    .status-option select {
+      background-color: #F5F5F5;
+      font-size: 16px;
+      color: #121212;
+      outline: none;
+      border: 2px solid transparent;
+    }
+
+    .status-option input:focus,
+    .status-option textarea:focus,
+    .status-option select:focus {
+      border: 2px solid #6f42c17a !important;
+    }
+
+    .status-option input:active,
+    .status-option textarea:active,
+    .status-option select:active {
+      border: 2px solid #6f42c17a !important;
+    }
+
+    .status-option p {
+      color: #6C6C6C;
+      font-size: 16px;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dashboard-wr w-100">
+    <!-- nav bar -->
+    <div class="nav-overlay" style="display: none;"></div>
+    <nav id="toggle-nav" class="position-fixed nav-wrapper hide-nav">
+      <div class="toggle-nav d-flex flex-column p-4">
+        <div class="login-profile d-flex align-flex-start py-3 border-bottom">
+          <div class="profile-pic position-relative rounded-circle">
+            <img class=""
+              src="https://staging.sriramakrishnahospital.com/wp-content/uploads/2024/09/srh-logo-mini-colored.svg"
+              alt="profile-picture" />
+          </div>
+
+          <!-- profile -->
+          <div class="profile-user nav-collapse ml-4">
+            <h2 id="login-user" class="log-user-name mb-2">
+              Mr. Lorem Ipsum
+            </h2>
+            <p id="user-authority" class="user-value">Admin</p>
+          </div>
+        </div>
+
+        <!-- dashboard menus -->
+        <div class="dashboard-options py-5">
+          <ul class="do-list position-relative p-0">
+            <li class="d-options mb-3">
+              <a class="p-3 rounded menu-item" href="admin.html"><img src="./img/dashboard-icon.svg" alt="" /><span
+                  class="nav-collapse">Dashboard</span></a>
+            </li>
+            <li class="d-options mb-3">
+              <a class="p-3 rounded menu-item active" href="javascript:void(0)"><img
+                  src="./img/bad-review.svg" alt="" /><span class="nav-collapse">Bad Reviews</span></a>
+            </li>
+            <li class="d-options mb-3">
+              <a class="p-3 rounded menu-item" href="#">
+                <img src="./img/log-out.svg" alt="Log out" /><span class="nav-collapse">Log Out</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- dashboard body -->
+    <div class="dashboard-body expand-body">
+      <nav class="nabar d-flex justify-content-between py-4 px-3 px-sm-4 px-md-5 position-relative">
+        <div class="nav-btn-wr d-flex align-items-center">
+          <button id="navbtn" class="btn mr-3 p-0">
+            <img src="./img/Vectornavbtn.svg" alt="" />
+          </button>
+          <div id="page-name" class="text-white">Bad Reviews</div>
+        </div>
+
+        <!-- search bar in mobile -->
+        <div class="search-section d-flex d-sm-none position-absolute p-4 hide">
+          <img src="./img/Vectorsearch.svg" alt="search" class="mr-2" />
+          <input type="search" id="dsearch-ml" class="" name="dsearch" placeholder="Search" />
+          <button id="cancel-button-ml"
+            class="btn display-search cancel-btn-top p-2 d-flex align-items-center justify-content-center text-capitalize">
+            cancel
+          </button>
+        </div>
+
+        <!-- search bar in desktops -->
+        <div class="position-relative d-flex align-items-center justify-content-center">
+          <div class="nav-search-bar">
+            <img src="./img/Vectorsearch.svg" alt="search" class="d-none d-sm-block" />
+            <input type="search" id="dsearch" class="d-none d-sm-block" name="dsearch" placeholder="Search" />
+            <button id="search-button"
+              class="btn display-search search-btn p-0 d-sm-none d-flex align-items-center justify-content-center">
+              <img src="./img/Vectorsearch.svg" alt="search" class="" />
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- inner body -->
+      <div class="inner-dash-body p-0 p-xl-4">
+        <!-- day filters -->
+        <div class="filter-wr d-flex justify-content-between align-items-center">
+          <ul id="day-filter" class="p-3 mb-0 d-nne d-flex w-100 overflow-auto">
+            <li class="p-2 filter-filter">
+              <a id="all-df" class="menu-filt active" href="javascript:void(0)">All</a>
+            </li>
+            <li class="p-2 filter-filter">
+              <a id="today-df" class="menu-filt" href="javascript:void(0)">Today</a>
+            </li>
+            <li class="p-2 filter-filter">
+              <a id="yesterday-df" class="menu-filt" href="javascript:void(0)">Yesterday</a>
+            </li>
+            <li class="p-2 filter-filter">
+              <a id="lastsdays-df" class="menu-filt" href="javascript:void(0)">Last 7 Days</a>
+            </li>
+            <li class="p-2 filter-filter">
+              <!-- <input id="custom-df" class="menu-filt" type="date" id="datePicker" /> -->
+              <div id="reportrangenew" class="menu-filt">
+                <span>Custom</span>
+                <div class="d-inline-block ml-2"><i class="fa fa-caret-down"></i></div>
+              </div>
+            </li>
+          </ul>
+          <div class="filter-button d-none d-xl-block">
+            <button type="button" class="btn d-flex justify-content-center align-items-center" data-toggle="modal"
+              data-target="#filters"><span class="d-inline-block mr-2"><img src="./img/filter.svg"
+                  alt="filter-icon"></span><span>Filter</span></button>
+          </div>
+        </div>
+
+        <section id="Bad_Reviews" class="Bad_Reviews section p-0 p-sm-5 p-xl-0">
+          <div
+            class="device-heade d-md-none d-flex align-items-center justify-content-between px-3 px-sm-0 py-4 mb-4 border-bottom">
+            <div class="d-flex flex-column justify-content-center align-items-center avarage-rev">
+              <h2 class="m-0">2.4</h2>
+              <span>35 Reviews</span>
+            </div>
+            <div class="d-flex flex-column">
+              <div class="d-flex align-items-center justify-content-end progress-bar-wr"><img class="mr-2"
+                  src="./img/start3.svg" alt="stars"><progress value="18" max="35"></progress><span
+                  class="d-inline-block ml-2">18</span></div>
+              <div class="d-flex align-items-center justify-content-end progress-bar-wr"><img class="mr-2"
+                  src="./img/start2.svg" alt="stars"><progress value="5" max="35"></progress><span
+                  class="d-inline-block ml-2">05</span></div>
+              <div class="d-flex align-items-center justify-content-end progress-bar-wr"><img class="mr-2"
+                  src="./img/start1.svg" alt="stars"><progress value="12" max="35"></progress><span
+                  class="d-inline-block ml-2">12</span></div>
+            </div>
+          </div>
+          <div class="page-header-wr d-flex align-items-center justify-content-between mb-3 px-3 px-sm-0">
+            <h3 class="page-title px-3"><span id="main-rev-count">35</span> <span>Reviews</span></h3>
+            <div class="filter-button d-block d-xl-none">
+              <button type="button" class="btn d-flex justify-content-center align-items-center" data-toggle="modal"
+                data-target="#filters"><span class="d-inline-block mr-2"><img src="./img/filter.svg"
+                    alt="filter-icon"></span><span>Filter</span></button>
+            </div>
+          </div>
+          <div class="row gy-4 mx-3 bg-white bg-lg">
+            <div class="col-12 col-sm-6 col-xl-4 border nb-md">
+              <div class="post-entry py-4 px-3 rounded my-3">
+                <div class="post-content">
+                  <div class="mta d-flex mb-3">
+                    <img class="mr-4"
+                      src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+                    <div class="meta">
+                      <p class="cat mb-0">Steve</p>
+                      <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                      </div>
+                      <div class="more-msg position-absolute"><span class="more-count"></span><span></span></div>
+                    </div>
+                  </div>
+                  <h3 class="mb-3 p-3 rounded">+91 9876543210</h3>
+                  <div class="p-3 rounded bg-gray"><span class="riview-textarea">Lorem ipsum dolor sit amet consectetur.
+                      Porttitor risus enim aliquam ornare magna. Vulputate
+                      I have been a patient at SRH for years and am disappointed with what they have turned into</span>
+                  </div>
+                  <div class="d-flex author align-items-center justify-content-between mt-3">
+                    <div class="date">
+                      <h6 class="m-0">September 18, 2024</h6>
+                    </div>
+                    <div class="status">
+                      <button type="button" class="btn" data-toggle="modal" data-target="#updateStatus">Update
+                        Status</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-4 border nb-md">
+              <div class="post-entry py-4 px-3 rounded my-3">
+                <div class="post-content">
+                  <div class="mta d-flex mb-3">
+                    <img class="mr-4"
+                      src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+                    <div class="meta">
+                      <p class="cat mb-0">Ahamed</p>
+                      <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                      </div>
+                    </div>
+                    <div class="more-msg position-absolute"><span class="more-count"></span><span></span></div>
+                  </div>
+                  <h3 class="mb-3 p-3 rounded">+91 9876543210</h3>
+                  <div class="p-3 rounded bg-gray"><span class="riview-textarea">Lorem ipsum dolor sit amet consectetur.
+                      Porttitor risus enim aliquam ornare magna. Vulputate
+                      Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate
+                    </span></div>
+                  <div class="d-flex author align-items-center justify-content-between mt-3">
+                    <div class="date">
+                      <h6 class="m-0">September 18, 2024</h6>
+                    </div>
+                    <div class="status st_2">
+                      <button class="btn">Not Converted</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-4 border nb-md">
+              <div class="post-entry py-4 px-3 rounded my-3">
+                <div class="post-content">
+                  <div class="mta d-flex mb-3">
+                    <img class="mr-4"
+                      src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+                    <div class="meta">
+                      <p class="cat mb-0">Priya</p>
+                      <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                      </div>
+                    </div>
+                    <div class="more-msg position-absolute"><span class="more-count"></span><span></span></div>
+                  </div>
+                  <h3 class="mb-3 p-3 rounded">+91 9876543210</h3>
+                  <div class="p-3 rounded bg-gray"><span class="riview-textarea">Lorem ipsum dolor sit amet consectetur.
+                      Porttitor risus enim aliquam ornare magna. Vulputate
+                      Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate
+                    </span></div>
+                  <div class="d-flex author align-items-center justify-content-between mt-3">
+                    <div class="date">
+                      <h6 class="m-0">September 18, 2024</h6>
+                    </div>
+                    <div class="status st_3">
+                      <button class="btn">Converted</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-4 border nb-md">
+              <div class="post-entry py-4 px-3 rounded my-3">
+                <div class="post-content">
+                  <div class="mta d-flex mb-3">
+                    <img class="mr-4"
+                      src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+                    <div class="meta">
+                      <p class="cat mb-0">Jayashree</p>
+                      <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                      </div>
+                    </div>
+                    <div class="more-msg position-absolute"><span class="more-count">3+ </span><span>More</span></div>
+                  </div>
+                  <h3 class="mb-3 p-3 rounded">+91 9876543210</h3>
+                  <div class="p-3 rounded bg-gray"><span class="riview-textarea">Lorem ipsum dolor sit amet consectetur.
+                      Porttitor risus enim aliquam ornare magna. Vulputate
+                      Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate
+                    </span></div>
+                  <div class="d-flex author align-items-center justify-content-between mt-3">
+                    <div class="date">
+                      <h6 class="m-0">September 18, 2024</h6>
+                    </div>
+                    <div class="status st_4">
+                      <button class="btn">Not Responded</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-4 border nb-md">
+              <div class="post-entry py-4 px-3 rounded my-3">
+                <div class="post-content">
+                  <div class="mta d-flex mb-3">
+                    <img class="mr-4"
+                      src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+                    <div class="meta">
+                      <p class="cat mb-0">Lalitha</p>
+                      <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                      </div>
+                    </div>
+                    <div class="more-msg position-absolute"><span class="more-count"></span><span></span></div>
+                  </div>
+                  <h3 class="mb-3 p-3 rounded">+91 9876543210</h3>
+                  <div class="p-3 rounded bg-gray"><span class="riview-textarea">Lorem ipsum dolor sit amet consectetur.
+                      Porttitor risus enim aliquam ornare magna. Vulputate
+                      Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate
+                    </span></div>
+                  <div class="d-flex author align-items-center justify-content-between mt-3">
+                    <div class="date">
+                      <h6 class="m-0">September 18, 2024</h6>
+                    </div>
+                    <div class="status st_3">
+                      <button class="btn">Converted</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-4 border nb-md">
+              <div class="post-entry py-4 px-3 rounded my-3">
+                <div class="post-content">
+                  <div class="mta d-flex mb-3">
+                    <img class="mr-4"
+                      src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+                    <div class="meta">
+                      <p class="cat mb-0">Harish</p>
+                      <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                      </div>
+                    </div>
+                    <div class="more-msg position-absolute"><span class="more-count"></span><span></span></div>
+                  </div>
+                  <h3 class="mb-3 p-3 rounded">+91 9876543210</h3>
+                  <div class="p-3 rounded bg-gray"><span class="riview-textarea">Lorem ipsum dolor sit amet consectetur.
+                      Porttitor risus enim aliquam ornare magna. Vulputate
+                      Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate
+                    </span></div>
+                  <div class="d-flex author align-items-center justify-content-between mt-3">
+                    <div class="date">
+                      <h6 class="m-0">September 18, 2024</h6>
+                    </div>
+                    <div class="status st_3">
+                      <button class="btn">Converted</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-4 border nb-md">
+              <div class="post-entry py-4 px-3 rounded my-3">
+                <div class="post-content">
+                  <div class="mta d-flex mb-3">
+                    <img class="mr-4"
+                      src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+                    <div class="meta">
+                      <p class="cat mb-0">Kaviya </p>
+                      <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                      </div>
+                    </div>
+                    <div class="more-msg position-absolute"><span class="more-count"></span><span></span></div>
+                  </div>
+                  <h3 class="mb-3 p-3 rounded">+91 9876543210</h3>
+                  <div class="p-3 rounded bg-gray"><span class="riview-textarea">Lorem ipsum dolor sit amet consectetur.
+                      Porttitor risus enim aliquam ornare magna. Vulputate
+                      Lorem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate
+                    </span></div>
+                  <div class="d-flex author align-items-center justify-content-between mt-3">
+                    <div class="date">
+                      <h6 class="m-0">September 18, 2024</h6>
+                    </div>
+                    <div class="status st_2">
+                      <button class="btn">Not Converted</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-4 border nb-md">
+              <div class="post-entry py-4 px-3 rounded my-3">
+                <div class="post-content">
+                  <div class="mta d-flex mb-3">
+                    <img class="mr-4"
+                      src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+                    <div class="meta">
+                      <p class="cat mb-0">Karthick</p>
+                      <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                      </div>
+                    </div>
+                    <div class="more-msg position-absolute"><span class="more-count"></span><span></span></div>
+                  </div>
+                  <h3 class="mb-3 p-3 rounded">+91 9876543210</h3>
+                  <div class="p-3 rounded bg-gray"><span class="riview-textarea">LLorem ipsum dolor sit amet
+                      consectetur. Porttitor risus enim aliquam ornare magna. Vulputate
+                      orem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate
+                    </span></div>
+                  <div class="d-flex author align-items-center justify-content-between mt-3">
+                    <div class="date">
+                      <h6 class="m-0">September 18, 2024</h6>
+                    </div>
+                    <div class="status st_2">
+                      <button class="btn">Not Converted</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-4 border nb-md">
+              <div class="post-entry py-4 px-3 rounded my-3">
+                <div class="post-content">
+                  <div class="mta d-flex mb-3">
+                    <img class="mr-4"
+                      src="https://review.brightbridgeinfotech.com/bb-admin/g-dashbord-imgs/mark-mask.png" alt="">
+                    <div class="meta">
+                      <p class="cat mb-0">Nithya Shri</p>
+                      <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                      </div>
+                      <div class="more-msg position-absolute"><span class="more-count"></span><span></span></div>
+                    </div>
+                  </div>
+                  <h3 class="mb-3 p-3 rounded">+91 9876543210</h3>
+                  <div class="p-3 rounded bg-gray"><span class="riview-textarea">LLorem ipsum dolor sit amet
+                      consectetur. Porttitor risus enim aliquam ornare magna. Vulputate
+                      orem ipsum dolor sit amet consectetur. Porttitor risus enim aliquam ornare magna. Vulputate
+                    </span></div>
+                  <div class="d-flex author align-items-center justify-content-between mt-3">
+                    <div class="date">
+                      <h6 class="m-0">September 18, 2024</h6>
+                    </div>
+                    <div class="status st_2">
+                      <button class="btn">Not Converted</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- filter popup -->
+  <div class="modal fade" id="filters" tabindex="-1" role="dialog" aria-labelledby="filtersLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content p-3">
+        <div class="modal-header pt-1">
+          <h5 class="modal-title" id="filterslLabel">Filters by</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="filter-options d-flex justify-content-between align-items-center mb-3">
+            <p class="m-0">Update Status</p><input type="checkbox">
+          </div>
+
+          <div class="filter-options d-flex justify-content-between align-items-center mb-3">
+            <p class="m-0">Converted</p><input type="checkbox">
+          </div>
+
+          <div class="filter-options d-flex justify-content-between align-items-center mb-3">
+            <p class="m-0">Not Converted</p><input type="checkbox">
+          </div>
+
+          <div class="filter-options d-flex justify-content-between align-items-center mb-3">
+            <p class="m-0">Not Responded</p><input type="checkbox">
+          </div>
+        </div>
+        <div class="modal-footer border-0 justify-content-between p-0">
+          <button type="button" class="btn m-3 py-2" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn m-3 py-2 apply-btn">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- update status popup -->
+  <div class="modal fade" id="updateStatus" tabindex="-1" role="dialog" aria-labelledby="updateStatusLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content p-3">
+        <div class="modal-header pt-1">
+          <h5 class="modal-title" id="filterslLabel">Update Status</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="status-option mb-3">
+            <p class="mb-2">Name</p>
+            <input type="text" placeholder="Enter Your name" class="py-2 px-3 rounded w-100">
+          </div>
+
+          <div class="status-option mb-3">
+            <p class="mb-2">Phone Number</p>
+            <input type="number" placeholder="Enter Your name" class="py-2 px-3 rounded w-100">
+          </div>
+
+          <div class="status-option mb-3">
+            <p class="mb-2">Review (18/09/2024)</p>
+            <textarea name="review" rows="3"
+              class="w-100 rounded py-2 px-3">I have been a patient at SRH for years and am disappointed with what they have turned into. I am extremely dissatisfied with their level of care and service. Outside the doctor’s room it’s unhygienic and crowded.</textarea>
+          </div>
+
+          <div class="status-option mb-3">
+            <p class="mb-2">Contact On</p>
+            <input type="number" placeholder="Enter Your name" class="py-2 px-3 rounded w-100">
+          </div>
+
+          <div class="status-option mb-3">
+            <p class="mb-2">Update Status</p>
+            <select name="update status" class="w-100 rounded py-2 px-3 text-muted">
+              <option value="" selected disabled>Choose Option</option>
+              <option value="">Converted</option>
+              <option value="">Not Converted</option>
+              <option value="">Not Responded</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer border-0 justify-content-between p-0">
+          <button type="button" class="btn m-3 py-2" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn m-3 py-2 apply-btn">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- custom scripts -->
+  <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript">
+
+    // Pie Charet code [chart JS query]
+    const ctx = document.getElementById("myPieChart").getContext("2d");
+
+    const myPieChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["one star", "two star", "three star"],
+        datasets: [
+          {
+            data: [15, 51, 34],
+            backgroundColor: ["#9FF2FF", "#E0D0FF", "#FFCFCF"],
+            hoverOffset: 10,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        layout: {
+          padding: {
+            right: 0,
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            enabled: false,
+          },
+          datalabels: {
+            formatter: (value, ctx) => {
+              let sum = ctx.chart.data.datasets[0].data.reduce(
+                (a, b) => a + b,
+                0
+              );
+              let percentage = ((value * 100) / sum).toFixed(0) + "%";
+              return percentage;
+            },
+            color: "#303030",
+            font: {
+              weight: "normal",
+              size: 20,
+            },
+          },
+        },
+        animation: {
+          animateScale: true,
+        },
+        hover: {
+          onHover: (event, chartElement) => {
+            if (chartElement.length) {
+              event.native.target.style.cursor = "pointer";
+            } else {
+              event.native.target.style.cursor = "default";
+            }
+          },
+        },
+      },
+      plugins: [ChartDataLabels],
+    });
+
+    // Legend container setup
+    const legendContainer = document.getElementById("legend-container");
+    const colors = ["#9FF2FF", "#E0D0FF", "#FFCFCF"];
+    const labels = ["Review - 12", "Review - 05", "Review - 18"];
+
+    let revCounter = 1;
+
+    labels.forEach((label, index) => {
+      const legendItem = document.createElement("div");
+      legendItem.className = "legend-item";
+      legendItem.innerHTML = `
+    <div class="legend-color" style="background-color: ${colors[index]};"></div>
+    <span class="rev-sno">${revCounter++}</span> 
+    <img src="./img/Staryellow.svg" class="legend-image" alt="${label} icon">
+    ${label}
+  `;
+      legendContainer.appendChild(legendItem);
+    });
+
+  </script>
+
+  <!-- JavaScript -->
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- dtae picker -->
+
+  <script>
+    $(document).ready(function () {
+      $('#reportrangenew').daterangepicker({
+        opens: 'left',
+        locale: {
+          format: 'MMM DD, YY'
+        },
+        ranges: {
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+          'Last 6 Months': [moment().subtract(5, 'months').startOf('month'), moment().endOf('month')],
+          'Last 12 Months': [moment().subtract(11, 'months').startOf('month'), moment().endOf('month')]
+        }
+      }, function (start, end, label) {
+        if (start.format('MMM DD, YY') === end.format('MMM DD, YY')) {
+          $('#reportrangenew span').html(start.format('MMM DD, YY'));
+        } else {
+          $('#reportrangenew span').html(start.format('MMM DD, YY') + ' - ' + end.format('MMM DD, YY'));
+        }
+      });
+    });
+
+  </script>
+
+  <!-- Daterangepicker JavaScript -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+</body>
+
+</html>

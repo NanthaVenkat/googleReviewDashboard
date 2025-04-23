@@ -1,0 +1,324 @@
+:root {
+    --primary-color: #775DA6;
+    --heading-color: #121212;
+    --sub-text-color: #888888;
+    --error-color: #FF0F0F;
+    --background-color: #F6F6F6;
+}
+
+* {
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+    background-color: var(--background-color) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--background-color) inset !important; /* Ensures background color applies */
+    box-shadow: 0 0 0px 1000px var(--background-color) inset !important;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Nunito Sans", sans-serif;
+    background-color: var(--background-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+@media (min-width: 1500px) {
+    .logo-img {
+        width: 220px;
+    }
+
+    #login-form .form-group {
+        padding: 10px;
+    }
+
+    #login-form .form-group input {
+        font-size: 24px;
+    }
+
+    .welcome-txt h1 {
+        font-size: 45px;
+    }
+
+    .welcome-txt p {
+        font-size: 24px;
+    }
+
+    .forgot-password {
+        font-size: 20px;
+    }
+
+    #log-in {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1499px) {
+
+    #login-form .form-group {
+        padding: 10px;
+    }
+
+    #login-form .form-group input {
+        font-size: 20px;
+    }
+
+    .welcome-txt h1 {
+        font-size: 37px;
+    }
+
+    .welcome-txt p {
+        font-size: 20px;
+    }
+
+    .forgot-password {
+        font-size: 16px;
+    }
+
+    #log-in {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 767px) {
+    .login-sec {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .banner-wr {
+        height: 100%;
+    }
+
+    .login-wr {
+        max-width: 500px;
+    }
+
+    .banner-inner {
+        border-radius: 0 50px 50px 0;
+    }
+
+    .login-wr {
+        padding: 30px 12px;
+    }
+
+    #login-form .form-group img {
+        width: 29px;
+    }
+}
+
+@media (max-width: 767px) {
+    .bnr-wr {
+        padding: 0;
+    }
+
+    .banner-wr {
+        height: 380px;
+    }
+
+    .bnr-wr:nth-child(2) {
+        border-radius: 50px 50px 0 0;
+        margin-top: -50px;
+    }
+
+    .login-sec .row {
+        margin-left: unset !important;
+        margin-right: unset !important;
+    }
+    
+    .logo-img {
+        width: 160px;
+    }
+
+    #login-form .form-group {
+        padding: 8px !important;
+    }
+
+    .bnr-wr:nth-child(2) {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    #login-form .form-group input {
+        font-size: 16px;
+    }
+
+    .welcome-txt h1 {
+        font-size: 32px;
+    }
+
+    .welcome-txt p {
+        font-size: 16px;
+    }
+
+    .forgot-password {
+        font-size: 12px;
+    }
+
+    #log-in {
+        font-size: 16px;
+    }
+
+    #login-form .form-group img {
+        width: 20px;
+    }
+}
+
+.bnr-wr {
+    background-color: var(--background-color);
+    position: relative;
+}
+
+.banner-inner {
+    background-image: url("/bb-admin/images/login-banner.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+#login-form .form-group {
+    display: flex;
+    align-items: center;
+}
+
+#login-form .form-group input {
+    background-color: transparent;
+    border: none;
+    font-weight: 400;
+}
+
+#password::placeholder {
+    letter-spacing: 1px !important;
+}
+
+#password {
+    letter-spacing: 5px;
+}
+
+#login-form .form-group-one .form-group:nth-child(1) {
+    border-bottom: 2px solid #0000001A;
+}
+
+#login-form .form-control:focus {
+    box-shadow: unset;
+    background: unset;
+}
+
+#login-form .form-group-one {
+    border: 2px solid #0000001A;
+    border-radius: 12px;
+    padding: 10px;
+    max-width: 100%;
+}
+
+#login-form .form-group input::placeholder {
+ color: #2626268F;
+}
+
+.logo-img {
+    width: 220px;
+}
+
+.welcome-txt h1 {
+    font-weight: 700;
+    color: var(--heading-color);
+}
+
+.welcome-txt p {
+    margin: auto;
+    color: var(--sub-text-color);
+}
+
+.forgot-password {
+    display: inline-block;
+    color: #FF0F0F;
+    font-family: "poppins", sans-serif;
+    font-weight: 400;
+}
+
+#log-in {
+    color: #fff;
+    font-weight: 600;
+    background-color: var(--primary-color);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.banner-inner::after, .banner-inner::before {
+    content: "";
+    width: 100%;
+    height: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+}
+
+.banner-inner::after {
+    background: linear-gradient(#1C232B -4%, #ffff0000);
+    top: 0;
+}
+
+.banner-inner::before {
+    bottom: 0;
+    background: linear-gradient(#ffff0000, #1c232b 100%);
+}
+
+#check-eye {
+    display: none;
+}
+
+#eye-icon {
+    cursor: pointer;
+    display: none; 
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+#eye-icon:before, #eye-icon:after {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#eye-icon:before {
+    background-image: url('/bb-admin/images/open-eye.svg');
+}
+
+#eye-icon:after {
+    background-image: url('/bb-admin/images/close-eye.svg');
+    display: none;
+}
+
+
+#check-eye:checked + #eye-icon:before {
+    display: none;
+}
+
+#check-eye:checked + #eye-icon:after {
+    display: inline-block;
+}
+
+
+
+

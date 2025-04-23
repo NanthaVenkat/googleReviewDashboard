@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- google fonts Nunito Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+    rel="stylesheet" />
+  <!-- google fonts Poppins -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  <!-- chart Js CDn -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- chart lable -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <link rel="stylesheet" href="./css/adminNew.css">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <div class="dashboard-wr w-100">
+    <!-- nav bar -->
+    <div class="nav-overlay" style="display: none;"></div>
+    <nav id="toggle-nav" class="position-fixed nav-wrapper hide-nav">
+      <div class="toggle-nav d-flex flex-column p-4">
+        <div class="login-profile d-flex align-flex-start py-3 border-bottom">
+          <div class="profile-pic position-relative rounded-circle">
+            <img class=""
+              src="https://staging.sriramakrishnahospital.com/wp-content/uploads/2024/09/srh-logo-mini-colored.svg"
+              alt="profile-picture" />
+          </div>
+
+          <!-- profile -->
+          <div class="profile-user nav-collapse ml-4">
+            <h2 id="login-user" class="log-user-name mb-2">
+              Mr. Lorem Ipsum
+            </h2>
+            <p id="user-authority" class="user-value">Admin</p>
+          </div>
+        </div>
+
+        <!-- dashboard menus -->
+        <div class="dashboard-options py-5">
+          <ul class="do-list position-relative p-0">
+            <li class="d-options mb-3">
+              <a class="p-3 rounded menu-item active" href="javascript:void(0)"><img src="./img/dashboard-icon.svg" alt="" /><span
+                  class="nav-collapse">Dashboard</span></a>
+            </li>
+            <li class="d-options mb-3 active">
+              <a class="p-3 rounded menu-item" href="bad-reviews.html"><img src="./img/bad-review.svg"
+                  alt="" /><span class="nav-collapse">Bad Reviews</span></a>
+            </li>
+            <li class="d-options mb-3">
+              <a class="p-3 rounded menu-item" href="#">
+                <img src="./img/log-out.svg" alt="Log out" /><span class="nav-collapse">Log Out</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- dashboard body -->
+    <div class="dashboard-body expand-body">
+      <nav class="nabar d-flex justify-content-between py-4 px-3 px-sm-4 px-md-5 position-relative">
+        <div class="nav-btn-wr d-flex align-items-center">
+          <button id="navbtn" class="btn mr-3 p-0">
+            <img src="./img/Vectornavbtn.svg" alt="" />
+          </button>
+          <div id="page-name" class="text-white">Dashboard</div>
+        </div>
+
+        <!-- search bar in mobile -->
+        <div class="search-section d-flex d-sm-none position-absolute p-4 hide">
+          <img src="./img/Vectorsearch.svg" alt="search" class="mr-2" />
+          <input type="search" id="dsearch-ml" class="" name="dsearch" placeholder="Search" />
+          <button id="cancel-button-ml"
+            class="btn display-search cancel-btn-top p-2 d-flex align-items-center justify-content-center text-capitalize">
+            cancel
+          </button>
+        </div>
+
+        <!-- search bar in desktops -->
+        <div class="position-relative d-flex align-items-center justify-content-center">
+          <div class="nav-search-bar">
+            <img src="./img/Vectorsearch.svg" alt="search" class="d-none d-sm-block" />
+            <input type="search" id="dsearch" class="d-none d-sm-block" name="dsearch" placeholder="Search" />
+            <button id="search-button"
+              class="btn display-search search-btn p-0 d-sm-none d-flex align-items-center justify-content-center">
+              <img src="./img/Vectorsearch.svg" alt="search" class="" />
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- inner body -->
+      <div class="inner-dash-body p-0 p-xl-4">
+        <!-- day filters -->
+        <ul id="day-filter" class="p-3 mb-0 d-nne d-flex w-100 overflow-auto">
+          <li class="p-2 filter-filter">
+            <a id="all-df" class="menu-filt active" href="javascript:void(0)">All</a>
+          </li>
+          <li class="p-2 filter-filter">
+            <a id="today-df" class="menu-filt" href="javascript:void(0)">Today</a>
+          </li>
+          <li class="p-2 filter-filter">
+            <a id="yesterday-df" class="menu-filt" href="javascript:void(0)">Yesterday</a>
+          </li>
+          <li class="p-2 filter-filter">
+            <a id="lastsdays-df" class="menu-filt" href="javascript:void(0)">Last 7 Days</a>
+          </li>
+          <li class="p-2 filter-filter">
+            <!-- <input id="custom-df" class="menu-filt" type="date" id="datePicker" /> -->
+            <div id="reportrangenew" class="menu-filt">
+              <span>Custom</span>
+              <div class="d-inline-block ml-2"><i class="fa fa-caret-down"></i></div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="dash-body-inner-inner d-flex row">
+          <div class="col-12 col-xl-4 d-flex flex-column align-items-center">
+            <div class="dashboard-card nm br-link bg-white m-0 p-3 m-xl-3 mb-4 mb-xl-0">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="card-name d-flex align-items-start">
+                  <span class="revie-image mr-4"><img src="./img/Dislike.svg" alt="review" /></span>
+                  <p class="tl text-capitalize m-0 d-flex flex-column">
+                    <span class="d-inline-block mb-3">Total Bad Reviews</span><span id="review-count"
+                      class="d-inline-block">35</span>
+                  </p>
+                </div>
+                <a class="p-2 link-arr" href="javascript:void(0)"><img src="./img/Vectorright.svg" alt="link arrow" /></a>
+              </div>
+            </div>
+
+            <div class="dashboard-card nb mbl tr br-link bg-white m-0 px-0 py-3 px-md-3 py-md-3 m-lg-3">
+              <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
+                <div class="card-name d-flex align-items-center">
+                  <p class="tl text-capitalize m-0">
+                    <span class="d-inline-block">Total Bad Reviews</span>
+                  </p>
+                </div>
+                <a class="p-2 d-flex align-items-center link-arr" href="javascript:void(0)"><span
+                    class="d-inline-block d-xl-none mr-3">See all</span><img src="./img/Vectorright.svg"
+                    alt="link arrow" /></a>
+              </div>
+              <div class="dash-card-body d-flex overflow-auto d-xl-block">
+                <div class="rev-pers-detls d-flex align-items-center py-3 mr-4 mr-xl-0 flex-column flex-lg-row">
+                  <div class="rev-profile-cover d-flex align-items-center mr-3 flex-column flex-md-row">
+                    <img class="mr-0 mr-md-3" src="./img/revr-prfl.svg" alt="reviewer profile" />
+                    <p class="reviwer-name mb-0 d-flex flex-column text-left">
+                      <span class="rev-name-name text-center text-md-left">Steve</span><span
+                        class="rev-date d-none d-md-block text-center text-md-left">September 18, 2024</span>
+                    </p>
+                  </div>
+                  <div class="review-star-count d-none d-lg-flex ">
+                    <img src="./img/threestart.svg" alt="star rate" />
+                  </div>
+                </div>
+
+                <div class="rev-pers-detls d-flex align-items-center py-3 mr-4 mr-xl-0 flex-column flex-lg-row">
+                  <div class="rev-profile-cover d-flex align-items-center mr-3 flex-column flex-md-row">
+                    <img class="mr-0 mr-md-3" src="./img/revr-prfl.svg" alt="reviewer profile" />
+                    <p class="reviwer-name mb-0 d-flex flex-column text-left">
+                      <span class="rev-name-name text-center text-md-left">Ahamed</span><span
+                        class="rev-date d-none d-md-block text-center text-md-left">September 18, 2024</span>
+                    </p>
+                  </div>
+                  <div class="review-star-count d-none d-lg-flex ">
+                    <img src="./img/threestart.svg" alt="star rate" />
+                  </div>
+                </div>
+
+                <div class="rev-pers-detls d-flex align-items-center py-3 mr-4 mr-xl-0 flex-column flex-lg-row">
+                  <div class="rev-profile-cover d-flex align-items-center mr-3 flex-column flex-md-row">
+                    <img class="mr-0 mr-md-3" src="./img/revr-prfl.svg" alt="reviewer profile" />
+                    <p class="reviwer-name mb-0 d-flex flex-column text-left">
+                      <span class="rev-name-name text-center text-md-left">Priya</span><span
+                        class="rev-date d-none d-md-block text-center text-md-left">September 10, 2024</span>
+                    </p>
+                  </div>
+                  <div class="review-star-count d-none d-lg-flex ">
+                    <img src="./img/threestart.svg" alt="star rate" />
+                  </div>
+                </div>
+
+                <div class="rev-pers-detls d-flex align-items-center py-3 mr-0 mr-xl-0 flex-column flex-lg-row">
+                  <div class="rev-profile-cover d-flex align-items-center mr-3 flex-column flex-md-row">
+                    <img class="mr-0 mr-md-3" src="./img/revr-prfl.svg" alt="reviewer profile" />
+                    <p class="reviwer-name mb-0 d-flex flex-column text-left">
+                      <span class="rev-name-name text-center text-md-left">Jayashree</span><span
+                        class="rev-date d-none d-md-block text-center text-md-left">September 10, 2024</span>
+                    </p>
+                  </div>
+                  <div class="review-star-count d-none d-lg-flex ">
+                    <img src="./img/threestart.svg" alt="star rate" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-xl-8 d-flex dashboard-card-ml justify-content-center align-content-start flex-column">
+            <div class="dashboard-card tr mbl br-link bg-white p-0 p-md-3 m-0 my-lg-3 h-100">
+              <div class="d-flex justify-content-between align-items-center nb border-bottom pb-2">
+                <div class="card-name d-flex align-items-center">
+                  <p class="tl text-capitalize mb-2 m-md-0">
+                    <span class="d-inline-block">Bad Reviews</span>
+                  </p>
+                </div>
+                <a class="p-2 d-none d-lg-block" href="javascript:void(0)"><img src="./img/Vectorright.svg" alt="link arrow" /></a>
+              </div>
+              <div
+                class="dash-card-body ml d-flex align-items-center h-100 justify-content-around flex-column flex-lg-row p-4 p-md-3 bg-white mb-3 mb-md-0">
+                <div class="pie-chart-wr d-flex justify-content-center align-items-center">
+                  <canvas id="myPieChart"></canvas>
+                </div>
+                <div id="legend-container" class="mt-4 d-flex flex-row flex-lg-column flex-wrap justify-content-center">
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex d-md-none">
+              <a href="javascript:void(0)" class="view-all-btn text-capitalize text-white my-4 mx-auto p-3 text-center">View All</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- custom scripts -->
+   <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript">
+    
+    // Pie Charet code [chart JS query]
+    const ctx = document.getElementById("myPieChart").getContext("2d");
+
+    const myPieChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["one star", "two star", "three star"],
+        datasets: [
+          {
+            data: [15, 51, 34],
+            backgroundColor: ["#9FF2FF", "#E0D0FF", "#FFCFCF"],
+            hoverOffset: 10,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        layout: {
+          padding: {
+            right: 0,
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            enabled: false,
+          },
+          datalabels: {
+            formatter: (value, ctx) => {
+              let sum = ctx.chart.data.datasets[0].data.reduce(
+                (a, b) => a + b,
+                0
+              );
+              let percentage = ((value * 100) / sum).toFixed(0) + "%";
+              return percentage;
+            },
+            color: "#303030",
+            font: {
+              weight: "normal",
+              size: 20,
+            },
+          },
+        },
+        animation: {
+          animateScale: true,
+        },
+        hover: {
+          onHover: (event, chartElement) => {
+            if (chartElement.length) {
+              event.native.target.style.cursor = "pointer";
+            } else {
+              event.native.target.style.cursor = "default";
+            }
+          },
+        },
+      },
+      plugins: [ChartDataLabels],
+    });
+
+    // Legend container setup
+    const legendContainer = document.getElementById("legend-container");
+    const colors = ["#9FF2FF", "#E0D0FF", "#FFCFCF"];
+    const labels = ["Review - 12", "Review - 05", "Review - 18"];
+
+    let revCounter = 1;
+
+    labels.forEach((label, index) => {
+      const legendItem = document.createElement("div");
+      legendItem.className = "legend-item";
+      legendItem.innerHTML = `
+    <div class="legend-color" style="background-color: ${colors[index]};"></div>
+    <span class="rev-sno">${revCounter++}</span> 
+    <img src="./img/Staryellow.svg" class="legend-image" alt="${label} icon">
+    ${label}
+  `;
+      legendContainer.appendChild(legendItem);
+    });
+
+  </script>
+
+  <!-- JavaScript -->
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- dtae picker -->
+
+  <script>
+    $(document).ready(function () {
+      $('#reportrangenew').daterangepicker({
+        opens: 'left',
+        locale: {
+          format: 'MMM DD, YY'
+        },
+        ranges: {
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+          'Last 6 Months': [moment().subtract(5, 'months').startOf('month'), moment().endOf('month')],
+          'Last 12 Months': [moment().subtract(11, 'months').startOf('month'), moment().endOf('month')]
+        }
+      }, function (start, end, label) {
+        if (start.format('MMM DD, YY') === end.format('MMM DD, YY')) {
+          $('#reportrangenew span').html(start.format('MMM DD, YY'));
+        } else {
+          $('#reportrangenew span').html(start.format('MMM DD, YY') + ' - ' + end.format('MMM DD, YY'));
+        }
+      });
+    });
+
+  </script>
+
+  <!-- Daterangepicker JavaScript -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+</body>
+
+</html>

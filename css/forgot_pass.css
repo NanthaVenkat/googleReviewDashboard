@@ -1,0 +1,240 @@
+:root {
+    --primary-color: #775DA6;
+    --heading-color: #121212;
+    --sub-text-color: #888888;
+    --error-color: #FF0F0F;
+    --background-color: #F6F6F6;
+}
+
+* {
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+    background-color: var(--background-color) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--background-color) inset !important; /* Ensures background color applies */
+    box-shadow: 0 0 0px 1000px var(--background-color) inset !important;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Nunito Sans", sans-serif;
+    background-color: var(--background-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+@media (min-width: 1500px) {
+    .logo-img {
+        width: 220px;
+    }
+
+    #forpass-form .form-group input {
+        font-size: 24px;
+    }
+
+    .welcome-txt h1 {
+        font-size: 45px;
+    }
+
+    .welcome-txt p {
+        font-size: 24px;
+    }
+
+    #req-pass {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1499px) {
+
+    #forpass-form .form-group input {
+        font-size: 20px;
+    }
+
+    .welcome-txt h1 {
+        font-size: 37px;
+    }
+
+    .welcome-txt p {
+        font-size: 20px;
+    }
+
+    #req-pass {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 767px) {
+
+    .forgot-password {
+        height: 100vh;
+        overflow: hidden;
+        background-image: url(/bb-admin/images/forpass_bg.webp);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .bnr-wr {
+        padding: 0;
+    }
+
+    .banner-wr {
+        height: 380px;
+    }
+
+    .bnr-wr {
+        border-radius: 50px 50px 0 0;
+        margin-top: -50px;
+    }
+
+    .bnr-wr {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .forpass-wr {
+        max-width: 500px;
+    }
+
+    .banner-inner {
+        border-radius: 0 50px 50px 0;
+    }
+
+    .forpass-wr {
+        padding: 30px 12px;
+    }
+
+    #forpass-form .form-group img {
+        width: 29px;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .login-sec .row {
+        margin-left: unset !important;
+        margin-right: unset !important;
+    }
+    
+    .logo-img {
+        width: 160px;
+    }
+
+    #forpass-form .form-group input {
+        font-size: 16px;
+    }
+
+    .welcome-txt h1 {
+        font-size: 32px;
+    }
+
+    .welcome-txt p {
+        font-size: 16px;
+    }
+
+    #req-pass {
+        font-size: 16px;
+    }
+
+    #forpass-form .form-group img {
+        width: 20px;
+    }
+
+    .welcome-txt {
+        width: 100%;
+    }
+
+    .forpass-wr {
+        padding: 0 25px;
+    }
+}
+
+#forpass-form .form-group input {
+    background-color: transparent;
+    border: none;
+    font-weight: 400;
+}
+
+#password::placeholder {
+    letter-spacing: 1px !important;
+}
+
+#password {
+    letter-spacing: 5px;
+}
+
+#forpass-form .form-control:focus {
+    box-shadow: unset;
+    background: unset;
+}
+
+#forpass-form .form-group-one {
+    border-radius: 12px;
+    max-width: 100%;
+}
+
+#forpass-form .form-group input::placeholder {
+ color: #2626268F;
+}
+
+#forpass-form .fg-inr {
+    padding: 10px 20px;
+    border: 2px solid #0000001A;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.email-lble {
+    font-size: 20px;
+    color: var(--heading-color);
+    font-weight: 600;
+}
+
+.logo-img {
+    width: 220px;
+}
+
+.welcome-txt h1 {
+    font-weight: 700;
+    color: var(--heading-color);
+}
+
+.welcome-txt p {
+    margin: auto;
+    color: var(--sub-text-color);
+}
+
+#req-pass {
+    color: #fff;
+    font-weight: 600;
+    background-color: var(--primary-color);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.forgot-password-btn {
+    color: var(--sub-text-color);
+    font-size: 22px;
+}
+
+.btl-arr {
+    display: inline-block;
+}
+
+.forgot-password-btn:hover .btl-arr {
+    transform: translateX(-5px);
+}
